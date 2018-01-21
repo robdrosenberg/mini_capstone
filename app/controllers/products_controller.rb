@@ -23,8 +23,15 @@ class ProductsController < ApplicationController
     product = Product.find_by(id: params[:id])
     product.update(
       title: params[:title],
-      price: params[:price],
+      price: params[:price]
       )
     render json: product.as_json
   end
+
+  def destroy
+    product = Product.find_by(id: params["id"])
+    product.destroy
+    render json: {message: "Product deleted Succesfully"}
+  end
+
 end
