@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  get "/all_products" => "products#all_products"
-  get "/blue_yeti" => "products#blue_yeti"
-  get "/seiko_watch" => "products#seiko_watch"
-
+  get "/products" => "products#index"
+  get "/products/:id" => "products#show"
+  post "/products" => "products#create"
+  patch "/products/:id" => "products#update"
+  delete "/products/:id" => "products#delete"
 end
