@@ -34,6 +34,7 @@ class Product < ApplicationRecord
       discounted: is_discounted?,
       image_url: image_url,
       description: description,
+      in_stock: in_stock,
       created_at: clean_created_at,
       updated_at: clean_updated_at
     }
