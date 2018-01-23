@@ -1,2 +1,41 @@
 class Product < ApplicationRecord
+  def is_discounted?
+    if price.to_f < 2
+      discounted = true
+    else
+      discounted = false
+    end
+    discounted
+  end
+
+  def tax
+    tax = price.to_f * 0.09
+  end
+
+  def total
+    price.to_f + tax
+  end
+
+  def clean_updated_at
+    updated_at.strftime("%A, %d %b %Y %l:%M %p")
+  end
+
+  def clean_created_at
+    created_at.strftime("%A, %d %b %Y %l:%M %p")
+  end
+
+  def as_json
+    {
+      id: id,
+      title: title,
+      price: price,
+      tax: tax,
+      total: total,
+      discounted: is_discounted?,
+      image_url: image_url,
+      description: description,
+      created_at: clean_created_at,
+      updated_at: clean_updated_at
+    }
+  end
 end
