@@ -1,6 +1,15 @@
 class ProductsController < ApplicationController
   def index
-    products = Product.all
+    products = Product.all.order(id: :asc)
+
+    search_input = params[:search]
+    price_sort = params[:price_sort]
+    if search_input
+      products = Product.all.order(id: :asc).where("title LIKE ?", "%#{search_input}%")
+    end
+    if price_sort
+      products = Product.all.order(price: :asc)
+    end
     render json: products.as_json
   end
 
@@ -13,19 +22,29 @@ class ProductsController < ApplicationController
     product = Product.new(
       title: params[:title],
       price: params[:price],
-      description: params[:description],
+      description: params[:description]
       )
     product.save
-    render json: product.as_json
+
+    if product.save
+      render json: product.as_json
+    else
+      render json: {error: product.errors.full_messages, status: :unprocessable_entity}
+    end
   end
 
   def update
     product = Product.find_by(id: params[:id])
-    product.update(
-      title: params[:title],
-      price: params[:price]
-      )
-    render json: product.as_json
+    product.title = params[:title] || product.title
+    product.price = params[:price] || product.price
+    product.description = params[:description] || product.price
+    if product.save
+      render json: product.as_json
+    else
+      render json: {
+        error: product.errors.full_messages, status: :unprocessable_entity}
+    end
+
   end
 
   def destroy

@@ -4,6 +4,7 @@ system "clear"
 
 puts "Welcome to my mini-capstone! Check out all the sweet products, or enter your own."
 puts "[1] See Every Product"
+puts "[1.5] Search for products with certain title"
 puts "[2] See a certain Product"
 puts "[3] Create a new Product"
 puts "[4] Update a Product"
@@ -12,7 +13,16 @@ puts "[5] Delete Product, BE CAREFUL"
 input_choice = gets.chomp
 
 if input_choice == "1"
-  response = Unirest.get("http://localhost:3000/products")
+  puts "Enter 1 to sort by price"
+  price_sort_input = gets.chomp
+  response = Unirest.get("http://localhost:3000/products?price_sort=#{price_sort_input}")
+  products = response.body
+  puts JSON.pretty_generate(products)
+elsif input_choice == "1.5"
+  puts "Enter Title you'd like to search:"
+  search_input = gets.chomp
+  puts "You've found:"
+  response = Unirest.get("http://localhost:3000/products?search=#{search_input}")
   products = response.body
   puts JSON.pretty_generate(products)
 elsif input_choice == "2"
