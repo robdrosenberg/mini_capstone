@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   
+  belongs_to :supplier
+
   validates :title, length: { minimum: 2 }
   validates :title, presence: true
   validates :title, uniqueness: true
@@ -43,7 +45,8 @@ class Product < ApplicationRecord
       description: description,
       in_stock: in_stock,
       created_at: clean_created_at,
-      updated_at: clean_updated_at
+      updated_at: clean_updated_at,
+      supplier: supplier.as_json
     }
   end
 end
