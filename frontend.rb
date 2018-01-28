@@ -1,6 +1,7 @@
 require 'unirest'
-
+require 'tty-prompt'
 system "clear"
+prompt = TTY::Prompt.new
 
 puts "Welcome to my mini-capstone! Check out all the sweet products, or enter your own."
 puts "[1] See Every Product"
@@ -69,8 +70,7 @@ elsif input_choice == "6"
   params[:name] = gets.chomp
   puts "Email:"
   params[:email] = gets.chomp
-  puts "Password:"
-  params[:password] = gets.chomp
+  params[:password] = prompt.mask("Password: ")
 
   response = Unirest.post("http://localhost:3000/users", parameters: params)
   new_user = response.body
