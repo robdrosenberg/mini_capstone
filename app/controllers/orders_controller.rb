@@ -2,12 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user
 
   def index
-    if current_user
-      orders = current_user.orders
-      render json: orders.as_json
-    else
-      render json: {message: "No current user logged in."}
-    end
+    orders = current_user.orders
+    render json: orders.as_json
   end
 
   def create

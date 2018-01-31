@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_admin, except: [:index, :show]
   def index
     if current_user
       products = current_user.products
@@ -50,7 +50,6 @@ class ProductsController < ApplicationController
       render json: {
         error: product.errors.full_messages, status: :unprocessable_entity}
     end
-
   end
 
   def destroy

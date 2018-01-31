@@ -112,7 +112,6 @@ while true
     order = response.body
     puts JSON.pretty_generate(order)
   elsif input_choice == "10"
-    puts "Here are all your orders:"
     response = Unirest.get("http://localhost:3000/orders")
     orders = response.body
     puts JSON.pretty_generate(orders)
