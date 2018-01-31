@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   
   belongs_to :supplier
+  has_many :orders
 
   validates :title, length: { minimum: 2 }
   validates :title, presence: true

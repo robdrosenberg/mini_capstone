@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get "/products" => "products#index"
@@ -14,5 +15,8 @@ Rails.application.routes.draw do
   delete "/suppliers/:id" => "suppliers#destroy"
 
   post "/users" => "users#create"
+
+  get "/orders" => 'orders#index'
+  post "/orders" => "orders#create"
 
 end

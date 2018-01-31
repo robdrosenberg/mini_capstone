@@ -1,15 +1,21 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user
   def index
-    products = Product.all.order(id: :asc)
+    if current_user
+      products = current_user.products
+      render json: products.as_json
+    else
+      render json: []
+    end
 
-    search_input = params[:search]
-    price_sort = params[:price_sort]
-    if search_input
-      products = Product.all.order(id: :asc).where("title LIKE ?", "%#{search_input}%")
-    end
-    if price_sort
-      products = Product.all.order(price: :asc)
-    end
+    # search_input = params[:search]
+    # price_sort = params[:price_sort]
+    # if search_input
+    #   products = Product.all.order(id: :asc).where("title LIKE ?", "%#{search_input}%")
+    # end
+    # if price_sort
+    #   products = Product.all.order(price: :asc)
+    # end
     render json: products.as_json
   end
 
