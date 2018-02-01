@@ -2,6 +2,8 @@ class Product < ApplicationRecord
   
   belongs_to :supplier
   has_many :orders
+  has_many :category_products
+  has_many :categories, through: :category_products
 
   validates :title, length: { minimum: 2 }
   validates :title, presence: true
@@ -47,7 +49,8 @@ class Product < ApplicationRecord
       in_stock: in_stock,
       created_at: clean_created_at,
       updated_at: clean_updated_at,
-      supplier: supplier.as_json
+      supplier: supplier.as_json,
+      categories: categories.map {|category| category.title}
     }
   end
 end

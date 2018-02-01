@@ -1,6 +1,8 @@
 require 'unirest'
 require 'tty-prompt'
 
+admin = false
+
 prompt = TTY::Prompt.new
 
 while true
@@ -9,14 +11,17 @@ while true
   puts "[1] See Every Product"
   puts "[1.5] Search for products with certain title"
   puts "[2] See a certain Product"
-  puts "[3] Create a new Product"
-  puts "[4] Update a Product"
-  puts "[5] Delete Product, BE CAREFUL"
+  if admin
+    puts "[3] Create a new Product"
+    puts "[4] Update a Product"
+    puts "[5] Delete Product, BE CAREFUL"
+  end
   puts "[6] Signup!?"
   puts "[7] Login"
   puts "[8] Logout"
   puts "[9] Create an order"
   puts "[10] See all orders"
+  puts "[11] See products belonging to a category"
   puts "[q] to quit"
 
   input_choice = gets.chomp
@@ -95,6 +100,7 @@ while true
       })
     puts JSON.pretty_generate(response.body)
     jwt = response.body["jwt"]
+    admin = response.body["admin"]
     Unirest.default_header("Authorization", "Bearer #{jwt}")
 
   elsif input_choice == "8"
@@ -115,6 +121,17 @@ while true
     response = Unirest.get("http://localhost:3000/orders")
     orders = response.body
     puts JSON.pretty_generate(orders)
+  elsif input_choice == "11"
+    puts "Enter category ID:"
+    input_id = gets.chomp
+
+    response = Unirest.get("http://localhost:3000/categories/#{input_id}")
+    products = response.body
+
+    puts JSON.pretty_generate(products)
+    
+
+
   elsif input_choice == "q"
     puts "goodbye!"
     break
