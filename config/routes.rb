@@ -21,4 +21,6 @@ Rails.application.routes.draw do
 
   get "/categories/:id" => "categories#show"
 
+  post "/carted_products/:product_id/:quantity" => "carted_products#create"
+
 end
