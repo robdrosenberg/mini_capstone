@@ -145,10 +145,28 @@ while true
     puts JSON.pretty_generate(carted_product)
 
   elsif input_choice == "13"
+    puts "Here is your shopping cart"
     response = Unirest.get("http://localhost:3000/carted_products")
     carted_products = response.body
     puts JSON.pretty_generate(carted_products)
-    
+
+    puts "Enter o to place order, or press r to remove product"
+    new_choice = gets.chomp
+    if new_choice == "o"
+      response = Unirest.post("http://localhost:3000/orders")
+      order = response.body
+      puts JSON.pretty_generate(order)
+    elsif new_choice == "r"
+      puts "Enter id of carted product to remove:"
+      # carted_products.each do |carted_product|
+      #   puts "#{carted_product['id']} #{carted_product['product']['title']}"
+      # end
+      id = gets.chomp
+
+      response = Unirest.delete("http://localhost:3000/carted_products/#{id}")
+      puts JSON.pretty_generate(response.body)
+    end
+
   elsif input_choice == "q"
     puts "goodbye!"
     break
