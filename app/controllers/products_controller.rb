@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
   def index
     if current_user
-      products = current_user.products
+      products = Product.all
       render json: products.as_json
     else
       render json: []
@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
     # if price_sort
     #   products = Product.all.order(price: :asc)
     # end
-    render json: products.as_json
   end
 
   def show

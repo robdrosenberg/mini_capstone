@@ -22,14 +22,16 @@ while true
   puts "[9] Create an order"
   puts "[10] See all orders"
   puts "[11] See products belonging to a category"
+  puts "[12] Add item to cart"
+  puts "[13] To see Cart"
   puts "[q] to quit"
 
   input_choice = gets.chomp
 
   if input_choice == "1"
-    puts "Enter 1 to sort by price"
-    price_sort_input = gets.chomp
-    response = Unirest.get("http://localhost:3000/products?price_sort=#{price_sort_input}")
+    # puts "Enter 1 to sort by price" ?price_sort=#{price_sort_input}
+    # price_sort_input = gets.chomp
+    response = Unirest.get("http://localhost:3000/products")
     products = response.body
     puts JSON.pretty_generate(products)
   elsif input_choice == "1.5"
@@ -129,9 +131,24 @@ while true
     products = response.body
 
     puts JSON.pretty_generate(products)
+
+  elsif input_choice == "12"
+    params = {}
+    puts "Enter the product id you'd like to add:"
+    params[:product_id] = gets.chomp
+    puts "Enter your quantity:"
+    params[:quantity] = gets.chomp
+
+    response = Unirest.post("http://localhost:3000/carted_products", parameters: params)
+    carted_product = response.body
+
+    puts JSON.pretty_generate(carted_product)
+
+  elsif input_choice == "13"
+    response = Unirest.get("http://localhost:3000/carted_products")
+    carted_products = response.body
+    puts JSON.pretty_generate(carted_products)
     
-
-
   elsif input_choice == "q"
     puts "goodbye!"
     break
