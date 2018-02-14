@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="products.css">
+  
+
 
     <title>Mini-Capstone</title>
+    <script src="index.js" defer></script>
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Mini-Capstone</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,38 +54,10 @@
     </div>
     <div class="container">
       <div class="card-deck">
-        <div class="card">
-          <img class="card-img-top" src="/images/watches.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Seiko Watches</h5>
-            <p class="card-text">Beautiful Wrist Watches to Stunt on all your haters with! If they aren't following you on instagram they will now.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="/images/watches.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Seiko Watches</h5>
-            <p class="card-text">Beautiful Wrist Watches to Stunt on all your haters with! If they aren't following you on instagram they will now.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="/images/watches.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Seiko Watches</h5>
-            <p class="card-text">Beautiful Wrist Watches to Stunt on all your haters! If they aren't following you on instagram they will now.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+        <div class="row">
         </div>
       </div>
-    </div>
+    </div>  
 
 
     <!-- Optional JavaScript -->
@@ -92,3 +67,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<template id="product-card">
+    <div class="card">
+      <img class="card-img-top" src="images/watches.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Seiko Watches</h5>
+        <p class="card-text">Beautiful Wrist Watches to Stunt on all your haters with! If they aren't following you on instagram they will now.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+</template>
+
