@@ -6,7 +6,7 @@ var productRow = document.querySelector(".row");
 // productRow.appendChild(productTemplate.content.cloneNode(true));
 // productRow.appendChild(productTemplate.content.cloneNode(true));
 
-axios.get("http://localhost:3000/products").then(function(response){
+axios.get("https://rob-mini-cap.herokuapp.com/products").then(function(response){
   var products = response.data;
   console.log(response.data)
 
