@@ -1,12 +1,15 @@
 class ProductsController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
   def index
-    if current_user
-      products = Product.all
-      render json: products.as_json
-    else
-      render json: []
-    end
+      
+    products = Product.all
+    render json: products.as_json
+
+    # if current_user
+      
+    # else
+    #   render json: []
+    # end
 
     # search_input = params[:search]
     # price_sort = params[:price_sort]
