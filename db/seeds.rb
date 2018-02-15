@@ -3,6 +3,10 @@ Supplier.create!([
   {name: "Google", email: "googs@google.com", phone_number: "5609123674"},
   {name: "New Egg", email: "new@eggs.com", phone_number: "8195746223"}
 ])
+User.create!([
+  {name: "Test", email: "test@test.com", password_digest: "$2a$10$rsZfQrN5UJ5YMh4KvZTYRuWzLNnggStWH0oGXO8otd/gIWRJQGR5S", admin: false},
+  {name: "Rob", email: "rob@rob.com", password_digest: "$2a$10$wlYUzqmeuX1k/lr8CVZlA.wQ/dHHG1VA3d6OHtFRw.fPDNkOqSRlG", admin: true}
+])
 Product.create!([
   {title: "Hydro Flask", price: "35.0", image_url: nil, description: "The best water bottle ever. Ice foreva!", in_stock: true, supplier_id: 1},
   {title: "Herbal Tea", price: "1.5", image_url: nil, description: "Yummy and dirt cheap! But not made with dirt. I promise!", in_stock: true, supplier_id: 1},
@@ -10,10 +14,6 @@ Product.create!([
   {title: "Bubble Tea", price: "5.0", image_url: nil, description: nil, in_stock: true, supplier_id: 2}
 ])
 
-User.create!([
-  {name: "Test", email: "test@test.com", password_digest: "$2a$10$rsZfQrN5UJ5YMh4KvZTYRuWzLNnggStWH0oGXO8otd/gIWRJQGR5S", admin: false},
-  {name: "Rob", email: "rob@rob.com", password_digest: "$2a$10$wlYUzqmeuX1k/lr8CVZlA.wQ/dHHG1VA3d6OHtFRw.fPDNkOqSRlG", admin: true}
-])
 CartedProduct.create!([
   {user_id: 2, product_id: 5, quantity: 3, status: "purchased", order_id: 3},
   {user_id: 2, product_id: 2, quantity: 1, status: "purchased", order_id: 3},
