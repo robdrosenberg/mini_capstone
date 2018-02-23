@@ -20,38 +20,21 @@
 
     <div id="vue-app">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Mini-Capstone</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/#/">Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/#/signup">Signup</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/#/login">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/#/logout">Logout</a>
-            </li>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown link
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a> -->
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      
+      <a class="navbar-brand" href="#">Mini-Capstone</a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/#/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#/signup">Signup</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#/login">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#/logout">Logout</a></li>
+        <li class="nav-item"><a href="/#/products" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="/#/products/new" class="nav-link">Create Product</a></li>
+        <li class="nav-item"><a href="/#/cart" class="nav-link">Shopping Cart</a></li>
+      </ul>
+    </nav>
+      <!-- <a href="/#/">Home</a>
+      <a href="/#/signup">Signup</a>
+      <a href="/#/login">Login</a>
+      <a href="/#/logout">Logout</a> -->
       <router-view></router-view>
 
     </div>
@@ -165,6 +148,97 @@
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
+  </div>
+</template>
+
+<template id="products-index-page">
+  <div class="vue-component">
+    <div class="container">
+      <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">{{message}}</h1>
+        <p class="lead">Check out all the variety of products we have.</p>
+      </div>
+    </div>
+      <div class="row">
+        <div v-for="product in products">
+          <div class="card" style="width: 20rem;">
+            <img class="card-img-top" :src="product.image_url" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
+              <p class="card-text">{{product.description}}</p>
+              <p class="card-text">{{product.price}}</p>
+              <a v-bind:href="'/#/products/' + product.id" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="products-create-page">
+  <div class="vue-component">
+    <div class="container">
+      <h1>{{message}}</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label> 
+        <input type="text" class="form-control" v-model="title">
+      </div>
+      <div class="form-group">
+        <label>price</label>
+        <input type="text" class="form-control" v-model="price">
+      </div>
+      <div class="form-group">
+        <label>image_url</label>
+        <input type="text" class="form-control" v-model="image_url">
+      </div>
+      <div class="form-group">
+        <label>description</label>
+        <input type="text" class="form-control" v-model="description">
+      </div>
+      <div class="form-group">
+        <label>Supplier ID:</label>
+        <input type="text" class="form-control" v-model="supplier_id">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+  </div>
+</template>
+
+<template id="shopping-cart">
+  <div class="vue-component">
+    <div class="container">
+      <h1>{{message}}</h1>
+      <div v-for="carted_product in carted_products">
+        <div class="card" style="width: 20rem;">
+          <img class="card-img-top" src="/images/watches.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{carted_product.title}}</h5>
+            <p class="card-text">{{}}</p>
+            <p class="card-text">{{}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="product-show-page">
+  <div class="vue-component">
+    <div class="container">
+      <br>
+      <h1>{{product.title}}</h1>
+      <img :src="product.image_url">
+      <p>${{product.price}}</p>
+      <p>{{product.description}}</p>
+
+      <a href="/#/products">Back to All Products</a>
+    </div>
   </div>
 </template>
 

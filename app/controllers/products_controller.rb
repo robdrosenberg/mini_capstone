@@ -30,14 +30,16 @@ class ProductsController < ApplicationController
     product = Product.new(
       title: params[:title],
       price: params[:price],
-      description: params[:description]
+      description: params[:description],
+      image_url: params[:image_url],
+      supplier_id: params[:supplier_id]
       )
     product.save
 
     if product.save
       render json: product.as_json
     else
-      render json: {error: product.errors.full_messages, status: :unprocessable_entity}
+      render json: {error: product.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

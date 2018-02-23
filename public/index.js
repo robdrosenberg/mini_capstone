@@ -31,6 +31,8 @@ var HomePage = {
   methods: {},
   computed: {}
 };
+
+
 var SignupPage = {
   template: "#signup-page",
   data: function() {
@@ -97,6 +99,23 @@ var LoginPage = {
   }
 };
 
+var ProductsIndexPage = {
+  template: "#products-index-page",
+  data: function() {
+    return {
+      message: "All Products",
+      products: []
+    };
+  },
+  created: function() {
+    axios.get("/products.json").then(function(response){
+      this.products = response.data;
+    }.bind(this))
+  },
+  methods: {},
+  computed: {}
+};
+
 var LogoutPage = {
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
@@ -105,12 +124,87 @@ var LogoutPage = {
   }
 };
 
+var ProductsCreatePage = {
+  template: "#products-create-page",
+  data: function() {
+    return {
+      message: "Create a Product",
+      title: "",
+      price: "",
+      image_url: "",
+      description: "",
+      supplier_id: "",
+      errors: []
+    };
+  },
+  created: function() {},
+  methods: {
+    submit: function(){
+      var params = {
+        title: this.title,
+        price: this.price,
+        image_url: this.image_url,
+        description: this.description,
+        supplier_id: this.supplier_id
+      };
+      axios.post("/products", params).then(function(response){
+        router.push("/");
+        // this.title = ""
+        // this.price = ""
+        // this.image_url = ""
+        // this.description = ""
+        // this.supplier_id = ""
+      }).catch(function(error){
+        this.errors = error.response.data.error;
+      }.bind(this)
+    )}
+  },
+  computed: {}
+};
+
+var ShoppingCart = {
+  template: "#shopping-cart",
+  data: function() {
+    return {
+      message: "Your Shopping Cart",
+      carted_products: []
+    };
+  },
+  created: function() {
+    axios.get("/carted_products.json").then(function(response){
+      this.carted_products = response.data;
+    }.bind(this))
+  },
+  methods: {},
+  computed: {}
+};
+
+var ProductShowPage = {
+  template: "#product-show-page",
+  data: function() {
+    return {
+      product: []
+    };
+  },
+  created: function() {
+    axios.get("/products/" + this.$route.params.id).then(function(response){
+      this.product = response.data;
+    }.bind(this));
+  },
+  methods: {},
+  computed: {}
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/signup", component: SignupPage},
     { path: "/login", component: LoginPage},
-    { path: "/logout", component: LogoutPage}
+    { path: "/logout", component: LogoutPage},
+    { path: "/products", component: ProductsIndexPage},
+    { path: "/products/new", component: ProductsCreatePage},
+    { path: "/cart", component: ShoppingCart},
+    { path: "/products/:id", component: ProductShowPage}
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
