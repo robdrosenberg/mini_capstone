@@ -93,7 +93,34 @@
 
 <template id="home-page">
   <div class="vue-component">
-    <h1>{{ message }}</h1>
+    <div class="container">
+      <h1>{{ message }}</h1>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal">
+        Sign Up
+      </button>
+    </div>
+    
+    <!-- MODAL -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -168,12 +195,40 @@
               <h5 class="card-title">{{product.title}}</h5>
               <p class="card-text">{{product.description}}</p>
               <p class="card-text">{{product.price}}</p>
+              <button v-on:click="setCurrentProduct(product)" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+                Modal
+              </button>
               <a v-bind:href="'/#/products/' + product.id" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">currentProduct.title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img :src="currentProduct.image_url">
+            <h4>Price: ${{currentProduct.price}}</h4>
+            <p>Description: {{currentProduct.description}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 

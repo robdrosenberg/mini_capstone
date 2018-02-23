@@ -104,7 +104,8 @@ var ProductsIndexPage = {
   data: function() {
     return {
       message: "All Products",
-      products: []
+      products: [],
+      currentProduct: {}
     };
   },
   created: function() {
@@ -112,7 +113,12 @@ var ProductsIndexPage = {
       this.products = response.data;
     }.bind(this))
   },
-  methods: {},
+  methods: {
+    setCurrentProduct: function(product){
+      this.currentProduct = product;
+      console.log(this.currentProduct);
+    }
+  },
   computed: {}
 };
 
